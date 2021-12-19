@@ -10,6 +10,7 @@ data = json.loads(response.text)
 for result in data["results"]:
     data_date = result["date"]
     x = re.findall("\d{2}", data_date)
+    data_dateyear = x[0] + x[1]
     data_datemonth = x[2]
     data_dateday = x[3]
 
@@ -19,12 +20,9 @@ for result in data["results"]:
     # DLY-TMIN-NORMAL
     # DLY-TAVG-NORMAL
 
-    data_station = result["station"]
+    data_station_raw = result["station"]
+    #data_station_number = re.findall("GHCND:(.*)", data_station_raw) #get the actual station number
+
     data_value = float(result["value"]/10) #they store the float as a 3-digit integer in their API must convert to real float
 
-    print (data_dateday)
-
-    #print (type(data_date))
-
-    #if data_datatype == "DLY-TMAX-NORMAL":
-    #    print (data_value)
+    #print (data_station)
